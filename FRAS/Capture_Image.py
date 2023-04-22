@@ -56,7 +56,7 @@ def takeImages():
             # ret, img = cam.read()
 
             
-            img = all_images[sampleNum]
+            img = cv2.imread(all_images[sampleNum], cv2.IMREAD_COLOR)
             
                     
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
