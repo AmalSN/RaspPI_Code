@@ -53,7 +53,7 @@ def takeImages():
 
 
         while(True):
-            # ret, img = cam.read()
+            ret, img = cam.read()
 
             
             img = cv2.imread(all_images[sampleNum], cv2.IMREAD_COLOR)
