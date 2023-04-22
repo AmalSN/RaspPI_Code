@@ -4,6 +4,8 @@ import cv2
 import os
 
 import os.path
+
+from extract_pic import extract_pic 
 # counting the numbers
 
 
@@ -34,13 +36,29 @@ def takeImages():
     name = input("Enter Your Name: ")
 
     if(is_number(Id) and name.isalpha()):
-        cam = cv2.VideoCapture(0)
+        # cam = cv2.VideoCapture(0)
         harcascadePath = "haarcascade_frontalface_default.xml"
         detector = cv2.CascadeClassifier(harcascadePath)
         sampleNum = 0
 
+        extract_pic()
+
+        all_images = []
+
+        folder_dir = os.getcwd() + '/' + 'CameraImages'
+
+        for images in os.listdir(folder_dir):
+            if (images.endswith(".png")):
+                all_images.append(images)
+
+
         while(True):
-            ret, img = cam.read()
+            # ret, img = cam.read()
+
+            
+            img = all_images[sampleNum]
+            
+                    
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             faces = detector.detectMultiScale(gray, 1.3, 5, minSize=(30,30),flags = cv2.CASCADE_SCALE_IMAGE)
             for(x,y,w,h) in faces:
@@ -79,5 +97,4 @@ def takeImages():
             print("Enter Alphabetical Name")
         if(name.isalpha()):
             print("Enter Numeric ID")
-
 
