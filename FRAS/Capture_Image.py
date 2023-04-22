@@ -76,7 +76,6 @@ def takeImages():
             # break if the sample number is more than 100
             elif sampleNum > 100:
                 break
-        cam.release()
         cv2.destroyAllWindows()
         res = "Images Saved for ID : " + Id + " Name : " + name
         header=["Id", "Name"]
