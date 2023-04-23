@@ -1,6 +1,7 @@
 import datetime
 import os
 import time
+import requests
 
 import cv2
 import pandas as pd
@@ -51,6 +52,7 @@ def recognize_attendence():
                 timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
                 aa = str(aa)[2:-2]
                 attendance.loc[len(attendance)] = [Id, aa, date, timeStamp]
+                requests.post("http://",json={"name":aa,"rollNo":Id,"date":date,"time":timeStamp}) #fill this up
 
             tt = str(tt)[2:-2]
             if(100-conf) > 30:

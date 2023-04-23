@@ -99,6 +99,9 @@ def takeImages():
         res = "Images Saved for ID : " + Id + " Name : " + name
         header=["Id", "Name"]
         row = [Id, name]
+
+        requests.post("http://",params={"name":name,"rollNo":Id})
+
         if(os.path.isfile("StudentDetails"+os.sep+"StudentDetails.csv")):
             with open("StudentDetails"+os.sep+"StudentDetails.csv", 'a+') as csvFile:
                 writer = csv.writer(csvFile)
