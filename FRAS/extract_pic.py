@@ -1,23 +1,19 @@
-from bs4 import BeautifulSoup
+from selenium import webdriver
 import os
 import time
-import requests
 
 def extract_pic():
-    url = "http://localhost:5500/site.html"
+    url = "http://192.168.4.1/"
 
-    html_content = requests.get(url).text
     dir = "./CameraImages"
     for f in os.listdir(dir):
         os.remove(os.path.join(dir,f))
 
-    soup = BeautifulSoup(html_content, "html.parser")
-
-    response = []
+    driver = webdriver.Firefox()
+    driver.get(url)
     for i in range(50):
-        response.append(requests.get(soup.find("img")["src"]))
+        driver.get_screenshot_as_file(dir+"/"+str(i)+".png")
         time.sleep(0.1)
 
-    for i,res in enumerate(response):
-        with open(dir+"/"+str(i)+".png","wb") as file:
-            file.write(res.content)
+
+extract_pic()
