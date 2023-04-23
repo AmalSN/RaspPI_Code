@@ -1,11 +1,12 @@
 import csv
 
+import requests
 import cv2
 import os
 
 import os.path
 
-from extract_pic import extract_pic 
+from extract_pic import extract_pic
 # counting the numbers
 
 
@@ -52,7 +53,6 @@ def takeImages():
 
                 # print(images)
                 img = os.path.join(folder_dir, images)
-                print(img)
                 all_images.append(img)
 
         print(len(all_images))
@@ -73,25 +73,27 @@ def takeImages():
                     
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-            faces = detector.detectMultiScale(gray, 1.3, 5, minSize=(30,30),flags = cv2.CASCADE_SCALE_IMAGE)
+            # faces = detector.detectMultiScale(gray, scaleFactor=1.01, minNeighbors=1, minSize=(100,100), flags = cv2.CASCADE_SCALE_IMAGE)
 
 
-            for(x,y,w,h) in faces:
+            # for(x,y,w,h) in faces:
 
-                print("in loop")
-                cv2.rectangle(img, (x, y), (x+w, y+h), (10, 159, 255), 2)
-                #incrementing sample number
-                sampleNum = sampleNum+1
-                #saving the captured face in the dataset folder TrainingImage
-                cv2.imwrite("TrainingImage" + os.sep +name + "."+Id + '.' +
-                            str(sampleNum) + ".jpg", gray[y:y+h, x:x+w])
-                #display the frame
-                cv2.imshow('frame', img)
+            # print("in loop")
+            # cv2.rectangle(img, (x, y), (x+w, y+h), (10, 159, 255), 2)
+            #incrementing sample number
+            #saving the captured face in the dataset folder TrainingImage
+            cv2.imwrite("TrainingImage" + os.sep +name + "."+Id + '.' +
+                        str(sampleNum) + ".jpg", gray)
+            #display the frame
+            cv2.imshow('frame', img)
+
+            
+            sampleNum = sampleNum+1
             #wait for 100 miliseconds
             if cv2.waitKey(100) & 0xFF == ord('q'):
                 break
             # break if the sample number is more than 100
-            elif sampleNum > 50:
+            elif sampleNum > 49:
                 break
         cv2.destroyAllWindows()
         res = "Images Saved for ID : " + Id + " Name : " + name
