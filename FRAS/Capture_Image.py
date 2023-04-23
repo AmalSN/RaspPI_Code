@@ -1,3 +1,25 @@
+
+
+1 of 4,904
+(no subject)
+Inbox
+
+RUSHENDRA SIDIBOMMA
+Attachments
+2:37 PM (1 minute ago)
+to me
+
+
+
+--
+Thanking you,
+
+Rushendra Sidibomma
+UG-3
+S20200010179
+
+ One attachment
+  •  Scanned by Gmail
 import csv
 
 import cv2
@@ -48,20 +70,37 @@ def takeImages():
         folder_dir = os.getcwd() + '/' + 'CameraImages'
 
         for images in os.listdir(folder_dir):
-            if (images.endswith(".png")):
-                all_images.append(images)
+            if (images is not None):
+
+                # print(images)
+                img = os.path.join(folder_dir, images)
+                print(img)
+                all_images.append(img)
+
+        print(len(all_images))
+
+        # cv2.imshow("image" ,all_images[0])
+
+        # cv2.waitKey(5000)
 
 
         while(True):
             # ret, img = cam.read()
 
-            
-            img = cv2.imread(all_images[sampleNum], cv2.IMREAD_COLOR)
+            print(sampleNum)
+            img = cv2.imread(all_images[sampleNum])
+
+            # cv2.imshow("image", img)
             
                     
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
             faces = detector.detectMultiScale(gray, 1.3, 5, minSize=(30,30),flags = cv2.CASCADE_SCALE_IMAGE)
+
+
             for(x,y,w,h) in faces:
+
+                print("in loop")
                 cv2.rectangle(img, (x, y), (x+w, y+h), (10, 159, 255), 2)
                 #incrementing sample number
                 sampleNum = sampleNum+1
@@ -74,7 +113,7 @@ def takeImages():
             if cv2.waitKey(100) & 0xFF == ord('q'):
                 break
             # break if the sample number is more than 100
-            elif sampleNum > 100:
+            elif sampleNum > 50:
                 break
         cv2.destroyAllWindows()
         res = "Images Saved for ID : " + Id + " Name : " + name
@@ -96,4 +135,3 @@ def takeImages():
             print("Enter Alphabetical Name")
         if(name.isalpha()):
             print("Enter Numeric ID")
-
