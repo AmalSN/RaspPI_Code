@@ -1,25 +1,3 @@
-
-
-1 of 4,904
-(no subject)
-Inbox
-
-RUSHENDRA SIDIBOMMA
-Attachments
-2:37 PM (1 minute ago)
-to me
-
-
-
---
-Thanking you,
-
-Rushendra Sidibomma
-UG-3
-S20200010179
-
- One attachment
-  •  Scanned by Gmail
 import csv
 
 import cv2
